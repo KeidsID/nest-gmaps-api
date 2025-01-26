@@ -11,7 +11,8 @@
       "~/*": ["src/*"],
       "~test/*": ["test/*"]
     },
-    "types": ["jest"],
+    "types": ["node", "jest"],
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "strict": true,
     "removeComments": true,
@@ -23,7 +24,6 @@
     "noImplicitAny": true,
     "strictBindCallApply": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "resolveJsonModule": true
+    "noFallthroughCasesInSwitch": true
   }
 }

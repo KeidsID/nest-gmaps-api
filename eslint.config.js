@@ -10,14 +10,15 @@ import unicorn from "eslint-plugin-unicorn";
 let Config;
 
 /** @type {Config["files"]} */
-const files = ["**/*.{ts,js,mjs}"];
+const files = ["**/*.{ts,js,cjs}"];
 
 /** @type {Config["ignores"]} */
 const ignores = [
   "node_modules",
-  "build/**/*.{ts,js,mjs}",
-  "*.config.{ts,js,mjs}",
+  "build/**/*.{ts,js,cjs}",
+  "*.config.{ts,js,cjs}",
   "dangerfile.ts",
+  "test/*.config.{ts,js,cjs}",
 ];
 
 /** @type {Config["languageOptions"]} */
@@ -140,7 +141,10 @@ const unicornConfig = {
     ...unicorn.configs["recommended"].rules,
     "unicorn/filename-case": ["error", { case: "snakeCase" }],
     "unicorn/prefer-top-level-await": ["off"],
-    "unicorn/prevent-abbreviations": ["error", { ignore: ["\\.e2e.test$"] }],
+    "unicorn/prevent-abbreviations": [
+      "error",
+      { ignore: ["\\.e2e.(test|config)$"] },
+    ],
     "unicorn/better-regex": ["error"],
   },
 };
