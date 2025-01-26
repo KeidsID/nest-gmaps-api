@@ -1,0 +1,92 @@
+name: 🔧 Continuous Integration
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dependencies:
+    name: 📦 Get Dependencies
+    runs-on: ubuntu-latest
+
+    env:
+      cachePath: |
+        node_modules
+
+    steps:
+      - name: 📚 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+
+      - id: cache-key
+        run: |
+          echo "cacheKey=ci-${{ hashFiles('./package-lock.json') }}" >> $GITHUB_OUTPUT
+      - name: ♻️ Cache Dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.cachePath }}
+          key: ${{ steps.cache-key.outputs.cacheKey }}
+          restore-keys: |
+            ci-
+
+      - name: 📦 Get Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install
+
+    outputs:
+      cacheKey: ${{ steps.cache-key.outputs.cacheKey }}
+      cachePath: ${{ env.cachePath }}
+
+  lint:
+    name: 🔍 Code Linting
+    runs-on: ubuntu-latest
+    needs: dependencies
+
+    steps:
+      - name: 📚 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+
+      - name: ♻️ Restore Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ needs.dependencies.outputs.cachePath }}
+          key: ${{ needs.dependencies.outputs.cacheKey }}
+
+      - name: 🔍 Code Linting
+        run: npm run lint
+
+  test:
+    name: 🧪 Unit Test
+    runs-on: ubuntu-latest
+    needs: dependencies
+
+    steps:
+      - name: 📚 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+
+      - name: ♻️ Restore Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ needs.dependencies.outputs.cachePath }}
+          key: ${{ needs.dependencies.outputs.cacheKey }}
