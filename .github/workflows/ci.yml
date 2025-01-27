@@ -1,8 +1,6 @@
 name: 🔧 Continuous Integration
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
@@ -90,3 +88,9 @@ jobs:
         with:
           path: ${{ needs.dependencies.outputs.cachePath }}
           key: ${{ needs.dependencies.outputs.cacheKey }}
+
+      - name: 🧪 Unit Test
+        run: npm run test
+
+      - name: 🧪 End to End Test
+        run: npm run test:e2e
