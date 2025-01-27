@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   dependencies:
-    name: Install Dependencies
+    name: 📦 Get Dependencies
     runs-on: ubuntu-latest
 
     env:

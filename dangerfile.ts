@@ -1,6 +1,6 @@
 import { danger, fail, type GitHubPRDSL as LibraryGitHubDSL } from "danger";
 
-import { GitlintConfig } from "./gitlint.config.js";
+import { GitlintConfig } from "./gitlint.config";
 
 type PRLintConfig = {
   TITLE: { PATTERN: RegExp | null };
