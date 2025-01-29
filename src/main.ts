@@ -14,8 +14,8 @@ async function main(): Promise<void> {
     return SwaggerModule.createDocument(
       app,
       new DocumentBuilder()
-        .setTitle("Google Maps Proxy API")
-        .setDescription("Simple RestAPI that act as Google Maps API proxy")
+        .setTitle("Google Maps API Proxy")
+        .setDescription("Simple proxy server for Google Maps API")
         .addServer(AppPath.API)
         .build(),
       { ignoreGlobalPrefix: true },

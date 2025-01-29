@@ -1,7 +1,7 @@
 {
   "name": "nest-gmaps-api",
   "version": "0.0.1",
-  "description": "Simple back-end that act as Google Maps API proxy",
+  "description": "Simple proxy server for Google Maps API",
   "private": true,
   "type": "module",
   "engineStrict": true,

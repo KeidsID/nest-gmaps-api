@@ -46,8 +46,8 @@ const jsConfig = {
     "no-restricted-syntax": [
       "error",
       {
-        message: "Export/Import all (*) is forbidden.",
-        selector: "ExportAllDeclaration,ImportAllDeclaration",
+        message: "Import all (*) is forbidden.",
+        selector: "ImportAllDeclaration",
       },
       // {
       //   message: "Exports should be at the end of the file.",
