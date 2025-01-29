@@ -59,9 +59,8 @@ const jsConfig = {
       },
       {
         message:
-          "Avoid import/export type { Type } from './module'. Prefer import/export { type Type } from './module'.",
-        selector:
-          "ImportDeclaration[importKind=type],ExportNamedDeclaration[exportKind=type]",
+          "Avoid import type { Type } from './module'. Prefer import { type Type } from './module'.",
+        selector: "ImportDeclaration[importKind=type]",
       },
     ],
     "object-shorthand": ["error"],
