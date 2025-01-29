@@ -11,8 +11,16 @@ import { GeocodeResponseStatus } from "../libs/enums.js";
 export class ReverseGeocodingUseCase implements UseCase<GeocodeResponseDto> {
   constructor(private _geocodeRepository: GeocodeRepository) {}
 
-  async execute(lat: number, lng: number): Promise<GeocodeResponseDto> {
-    const results = await this._geocodeRepository.reverseGeocoding(lat, lng);
+  async execute(
+    lat: number,
+    lng: number,
+    languageCode?: string,
+  ): Promise<GeocodeResponseDto> {
+    const results = await this._geocodeRepository.reverseGeocoding(
+      lat,
+      lng,
+      languageCode,
+    );
 
     return {
       status:

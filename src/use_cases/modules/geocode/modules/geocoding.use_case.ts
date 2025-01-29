@@ -11,8 +11,14 @@ import { GeocodeResponseStatus } from "../libs/enums.js";
 export class GeocodingUseCase implements UseCase<GeocodeResponseDto> {
   constructor(private _geocodeRepository: GeocodeRepository) {}
 
-  async execute(address: string): Promise<GeocodeResponseDto> {
-    const results = await this._geocodeRepository.geocoding(address);
+  async execute(
+    address: string,
+    languageCode?: string,
+  ): Promise<GeocodeResponseDto> {
+    const results = await this._geocodeRepository.geocoding(
+      address,
+      languageCode,
+    );
 
     return {
       status:

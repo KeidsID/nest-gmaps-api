@@ -1,5 +1,7 @@
 import { Module } from "@nestjs/common";
 
+import { InfrastructuresModule } from "~/infrastructures/modules.js";
+
 import {
   GeocodingUseCase,
   ReverseGeocodingUseCase,
@@ -7,7 +9,11 @@ import {
 
 const modules = [GeocodingUseCase, ReverseGeocodingUseCase];
 
-@Module({ providers: modules, exports: modules })
+@Module({
+  imports: [InfrastructuresModule],
+  providers: modules,
+  exports: modules,
+})
 export class UseCasesModule {}
 
 export * from "./modules/geocode/modules.js";
