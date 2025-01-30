@@ -7,7 +7,7 @@ import { ApiTags } from "@nestjs/swagger";
  * @param basePath - Controller base path.
  * @param tags - Swagger tags, `[basePath]` by default.
  */
-export function AppController(
+export function ControllerWithTags(
   basePath: string,
   tags: string[] = [basePath],
 ): ClassDecorator {

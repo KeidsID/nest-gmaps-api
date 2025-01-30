@@ -3,11 +3,14 @@ import {
   ApiBody,
   type ApiBodyOptions,
   ApiOperation,
+  type ApiOperationOptions,
   ApiQuery,
   type ApiQueryOptions,
   ApiResponse,
   type ApiResponseOptions,
 } from "@nestjs/swagger";
+
+import { CommonNumber } from "~/libs/enums.js";
 
 /** Add swagger docs for your API. */
 export function ApiDocumentation(
@@ -16,16 +19,19 @@ export function ApiDocumentation(
   const {
     summary,
     description,
-    request: { body: requestBody, query: requestQuery },
+    externalDocs,
+    request: { body: requestBody, queries: requestQueries = [] },
     response,
   } = options;
 
   const decorators: MethodDecorator[] = [
-    ApiOperation({ summary, description }),
-    requestBody && ApiBody(requestBody),
-    requestQuery && ApiQuery(requestQuery),
+    ApiOperation({ summary, description, externalDocs }),
+    ...(requestBody ? [ApiBody(requestBody)] : []),
+    ...(requestQueries.length > CommonNumber.ZERO
+      ? requestQueries.map((options) => ApiQuery(options))
+      : []),
     ApiResponse(response),
-  ].filter(Boolean) as MethodDecorator[];
+  ];
 
   return applyDecorators(...decorators);
 }
@@ -33,6 +39,7 @@ export function ApiDocumentation(
 export type ApiDocumentationOptions = {
   summary?: string;
   description?: string;
-  request: { body?: ApiBodyOptions; query?: ApiQueryOptions };
+  externalDocs?: ApiOperationOptions["externalDocs"];
+  request: { body?: ApiBodyOptions; queries: ApiQueryOptions[] };
   response: ApiResponseOptions;
 };

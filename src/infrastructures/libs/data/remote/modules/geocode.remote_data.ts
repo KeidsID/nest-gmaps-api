@@ -24,7 +24,7 @@ export class GeocodeRemoteData {
     languageCode?: string,
   ): Promise<AxiosResponse<Record<string, unknown>>> {
     try {
-      return await this._apiClient.get("/", {
+      return await this._apiClient.get("/json", {
         params: { address, language: languageCode },
       });
     } catch (error) {
@@ -41,9 +41,9 @@ export class GeocodeRemoteData {
     languageCode?: string,
   ): Promise<AxiosResponse<Record<string, unknown>>> {
     try {
-      return await this._apiClient.get("/", {
+      return await this._apiClient.get("/json", {
         params: {
-          latlng: `${lat.toString()},${lng.toString()}`,
+          latlng: [lat, lng].map(String).join(","),
           language: languageCode,
         },
       });

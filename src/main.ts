@@ -3,12 +3,13 @@ import { type NestExpressApplication } from "@nestjs/platform-express";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
 import { AppModule } from "./app.module.js";
+import { ConfigService } from "./domain/services.js";
 import { AppPath } from "./interfaces/libs/enums.js";
 
 async function main(): Promise<void> {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  app.setGlobalPrefix(AppPath.API);
+  app.setGlobalPrefix(AppPath.API, { exclude: [AppPath.ROOT] });
 
   SwaggerModule.setup(AppPath.DOCS, app, () => {
     return SwaggerModule.createDocument(
@@ -22,7 +23,11 @@ async function main(): Promise<void> {
     );
   });
 
-  const PORT = 3000;
-  await app.listen(process.env.PORT ?? PORT);
+  const {
+    ENV: {
+      APP: { PORT },
+    },
+  } = app.get(ConfigService);
+  await app.listen(PORT);
 }
 void main();

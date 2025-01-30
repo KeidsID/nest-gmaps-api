@@ -9,6 +9,6 @@ export class GeocodeResponseDto {
   @ApiProperty({ enum: GeocodeResponseStatus, example: "OK" })
   readonly status!: ValueOf<typeof GeocodeResponseStatus>;
 
-  @ApiProperty()
+  @ApiProperty({ type: [GeocodeResult] })
   readonly results!: GeocodeResult[];
 }

@@ -3,7 +3,7 @@ import { ApiExcludeController } from "@nestjs/swagger";
 
 import { AppPath } from "./interfaces/libs/enums.js";
 
-@Controller()
+@Controller(AppPath.ROOT)
 @ApiExcludeController()
 export class AppController {
   @Get()
