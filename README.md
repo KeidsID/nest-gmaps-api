@@ -1,99 +1,133 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# nest-gmaps-api
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Simple Google Maps API Proxy Server.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table Of Contents
 
-## Description
+- [Developer Section](#developer-section)
+  - [Requirements](#requirements)
+  - [Dependencies](#dependencies)
+  - [Setup](#setup)
+  - [API Documentation](#api-documentation)
+  - [Project Structures](#project-structures)
+  - [Git Conventions](#git-conventions)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Developer Section
 
-## Project setup
+### Requirements
 
-```bash
-$ npm install
+[node-archive]: https://nodejs.org/en/about/previous-releases
+[nvm]: https://github.com/nvm-sh/nvm
+
+- Install [Node.js][node-archive] with the same version as defined on
+  [`package.json`](package.json) engines or [`.nvmrc`](.nvmrc) file.
+
+  You may use [NVM][nvm] (Node Version Manager) for easy installation.
+
+  ```sh
+  nvm use
+  ```
+
+### Dependencies
+
+[nestjs]: https://docs.nestjs.com/
+[axios]: https://axios-http.com/
+
+Main packages that are used as foundation for this project.
+
+- [NestJS][nestjs] -- framework for building efficient, scalable Node.js
+  server-side applications.
+- [Axios][axios] -- Promise based HTTP client for the browser/node.js.
+
+### Setup
+
+1. Install dependencies
+
+   ```sh
+   npm install
+   ```
+
+2. Intialize git hooks to validate commit messages
+
+   ```sh
+   npx simple-git-hooks
+   ```
+
+3. Create `.env` file. Use [`.env.example`](./.env.example) as a template.
+
+4. Now you're good to go!
+
+   ```sh
+   npm run start:dev
+   ```
+
+### API Documentation
+
+[google-maps-docs]: https://developers.google.com/maps/get-started
+
+- [Google Maps API Docs][google-maps-docs].
+
+### Project Structures
+
+[clean-architecture]: https://medium.com/@DrunknCode/clean-architecture-simplified-and-in-depth-guide-026333c54454
+
+This project is follow the [Clean Architecture][clean-architecture] principles.
+
+[main.ts]: ./src/main.ts
+
+- `/src` -- Source code
+
+  - [`main.ts`][main.ts] -- Application entry point.
+
+  - `/domain` -- Domain layer (Entities and services abstractions).
+
+  - `/infrastructures` -- Infrastructure layer (Services implementations).
+
+  - `/interfaces` -- Interfaces layer (Application routes/controllers).
+  
+  - `/use_cases` -- Application logic layer.
+
+  - `**/libs` -- Common constants, or other utilities used by folder it belongs,
+    e.g `/src/libs` is global libs, `/src/domain/libs` is domain libs, and so on.
+
+### Git Conventions
+
+[conventional-commits]: https://www.conventionalcommits.org
+
+We use [Conventional Commits][conventional-commits] to handle Git commit
+messages, and Github PR titles.
+
+Look at [`gitlint.config.ts`](gitlint.config.ts) to see supported commit
+types/scopes.
+
+#### Issue Title
+
+```sh
+<type>(<scopes(optional)>): <content>
 ```
 
-## Compile and run the project
+Examples:
 
-```bash
-# development
-$ npm run start
+- `feat: Geocoding API`
+- `feat: Places API`
 
-# watch mode
-$ npm run start:dev
+##### Commit Message / PR Title
 
-# production mode
-$ npm run start:prod
+```sh
+<type>(<scopes(optional)>): <content> gm-<issue-number>
 ```
 
-## Run tests
+Examples:
 
-```bash
-# unit tests
-$ npm run test
+- `feat: init swagger gm-4`
+- `feat(src-use_cases): add geocode use cases gm-4`
 
-# e2e tests
-$ npm run test:e2e
+##### Branch Name
 
-# test coverage
-$ npm run test:cov
+```sh
+<type>-<content>-gm-<issue-number>
 ```
 
-## Deployment
+Examples:
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- `feat-geocoding-gm-4`
