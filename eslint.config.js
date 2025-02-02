@@ -151,7 +151,7 @@ const unicornConfig = {
 /** @type {Config[]} */
 const overrideConfigs = [
   {
-    files: ["{src,test}/*.test.ts"],
+    files: ["{src,test}/**/*.test.ts"],
     rules: {
       "@typescript-eslint/no-magic-numbers": ["off"],
     },

@@ -1,4 +1,4 @@
-import { Controller, Get, Redirect } from "@nestjs/common";
+import { Controller, Get, HttpStatus, Redirect } from "@nestjs/common";
 import { ApiExcludeController } from "@nestjs/swagger";
 
 import { AppPath } from "./interfaces/libs/enums.js";
@@ -7,7 +7,7 @@ import { AppPath } from "./interfaces/libs/enums.js";
 @ApiExcludeController()
 export class AppController {
   @Get()
-  @Redirect(AppPath.DOCS)
+  @Redirect(AppPath.DOCS, HttpStatus.MOVED_PERMANENTLY)
   rootRedirect(): string {
     return "Redirecting to documentations...";
   }
