@@ -23,11 +23,8 @@ async function main(): Promise<void> {
     );
   });
 
-  const {
-    ENV: {
-      APP: { PORT },
-    },
-  } = app.get(ConfigService);
-  await app.listen(PORT);
+  const { ENV } = app.get(ConfigService);
+
+  await app.listen(ENV.APP.PORT);
 }
 void main();
