@@ -5,14 +5,14 @@ import baseConfig from "../jest.config.js";
 /** @type {import('ts-jest').JestConfigWithTsJest} **/
 export default {
   ...baseConfig,
-  rootDir: ".",
+  rootDir: "../",
   moduleNameMapper: pathsToModuleNameMapper(
     {
-      "~/*": ["../src/*"],
-      "~test/*": ["./*"],
+      "~/*": ["<rootDir>/src/*"],
+      "~test/*": ["<rootDir>/test/*"],
     },
     { useESM: true },
   ),
   testRegex: ".*\\.e2e\\.test\\.ts$",
-  coverageDirectory: "coverage",
+  coverageDirectory: "test/coverage",
 };

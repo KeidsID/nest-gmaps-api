@@ -1,4 +1,4 @@
-import { type INestApplication } from "@nestjs/common";
+import { HttpStatus, type INestApplication } from "@nestjs/common";
 import { Test, type TestingModule } from "@nestjs/testing";
 import request from "supertest";
 import { type App } from "supertest/types.js";
@@ -20,7 +20,6 @@ describe("AppController (e2e)", () => {
   it("/ (GET)", () => {
     return request(app.getHttpServer())
       .get("/")
-      .expect(200)
-      .expect("Hello World!");
+      .expect(HttpStatus.MOVED_PERMANENTLY);
   });
 });

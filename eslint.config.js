@@ -46,8 +46,8 @@ const jsConfig = {
     "no-restricted-syntax": [
       "error",
       {
-        message: "Export/Import all (*) is forbidden.",
-        selector: "ExportAllDeclaration,ImportAllDeclaration",
+        message: "Import all (*) is forbidden.",
+        selector: "ImportAllDeclaration",
       },
       // {
       //   message: "Exports should be at the end of the file.",
@@ -59,9 +59,8 @@ const jsConfig = {
       },
       {
         message:
-          "Avoid import/export type { Type } from './module'. Prefer import/export { type Type } from './module'.",
-        selector:
-          "ImportDeclaration[importKind=type],ExportNamedDeclaration[exportKind=type]",
+          "Avoid import type { Type } from './module'. Prefer import { type Type } from './module'.",
+        selector: "ImportDeclaration[importKind=type]",
       },
     ],
     "object-shorthand": ["error"],
@@ -152,7 +151,7 @@ const unicornConfig = {
 /** @type {Config[]} */
 const overrideConfigs = [
   {
-    files: ["{src,test}/*.test.ts"],
+    files: ["{src,test}/**/*.test.ts"],
     rules: {
       "@typescript-eslint/no-magic-numbers": ["off"],
     },

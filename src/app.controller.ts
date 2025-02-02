@@ -1,13 +1,14 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, HttpStatus, Redirect } from "@nestjs/common";
+import { ApiExcludeController } from "@nestjs/swagger";
 
-import { AppService } from "./app.service.js";
+import { AppPath } from "./interfaces/libs/enums.js";
 
-@Controller()
+@Controller(AppPath.ROOT)
+@ApiExcludeController()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Redirect(AppPath.DOCS, HttpStatus.MOVED_PERMANENTLY)
+  rootRedirect(): string {
+    return "Redirecting to documentations...";
   }
 }

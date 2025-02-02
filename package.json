@@ -1,7 +1,7 @@
 {
   "name": "nest-gmaps-api",
   "version": "0.0.1",
-  "description": "Simple back-end that act as Google Maps API proxy",
+  "description": "Simple proxy server for Google Maps API",
   "private": true,
   "type": "module",
   "engineStrict": true,
@@ -18,11 +18,11 @@
     "build": "nest build && tsc-alias -p tsconfig.build.json",
     "start": "node build/main.js",
     "start:dev": "nest start --watch -e \"tsc-alias -p tsconfig.build.json && node build/main.js\"",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"{src,test}/**/*.ts\"",
     "lint": "eslint \"{src,test}/**/*.ts\" --fix",
-    "test": "jest --coverage",
+    "test": "jest --coverage --verbose",
     "test:watch": "jest --watch --coverage",
-    "test:e2e": "jest --config ./test/jest.e2e.config.js --coverage"
+    "test:e2e": "jest --config ./test/jest.e2e.config.js --verbose"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged --cwd .",
@@ -32,6 +32,10 @@
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/swagger": "^11.0.3",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "express": "^5.0.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },
