@@ -14,6 +14,15 @@ async function main(): Promise<void> {
 
   app.enableCors({
     origin: ENV.APP.ORIGINS,
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    // https://developer.mozilla.org/en-US/docs/Glossary/CORS-safelisted_request_header
+    allowedHeaders: [
+      "Accept",
+      "Accept-Language",
+      "Content-Language",
+      "Content-Type",
+      "Range",
+    ],
   });
 
   SwaggerModule.setup(AppPath.DOCS, app, () => {
