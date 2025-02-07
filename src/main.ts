@@ -8,8 +8,13 @@ import { AppPath } from "./interfaces/libs/enums.js";
 
 async function main(): Promise<void> {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const { ENV } = app.get(ConfigService);
 
   app.setGlobalPrefix(AppPath.API, { exclude: [AppPath.ROOT] });
+
+  app.enableCors({
+    origin: ENV.APP.ORIGINS,
+  });
 
   SwaggerModule.setup(AppPath.DOCS, app, () => {
     return SwaggerModule.createDocument(
@@ -22,8 +27,6 @@ async function main(): Promise<void> {
       { ignoreGlobalPrefix: true },
     );
   });
-
-  const { ENV } = app.get(ConfigService);
 
   await app.listen(ENV.APP.PORT);
 }
