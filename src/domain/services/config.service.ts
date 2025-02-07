@@ -3,6 +3,6 @@ export abstract class ConfigService {
 }
 
 export type EnvironmentSchema = {
-  APP: { PORT: number };
+  APP: { PORT: number; ORIGINS: string[] };
   GOOGLE_MAPS: { API_KEY: string };
 };

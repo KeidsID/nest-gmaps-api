@@ -13,6 +13,9 @@ export class ConfigServiceImpl implements ConfigService {
     this.ENV = {
       APP: {
         PORT: Number(process.env.APP_PORT) || PORT_DEFAULT,
+        ORIGINS: process.env.APP_ORIGINS?.split(",").map((origin) =>
+          origin.trim(),
+        ) || ["*"],
       },
       GOOGLE_MAPS: {
         API_KEY: String(process.env.GOOGLE_MAPS_API_KEY),
