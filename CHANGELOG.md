@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/KeidsID/nest-gmaps-api/compare/v0.2.0...v0.2.1) (2025-02-07)
+
+
+### Bug Fixes
+
+* add missing cors configs -gm-8 ([#11](https://github.com/KeidsID/nest-gmaps-api/issues/11)) ([0aded3f](https://github.com/KeidsID/nest-gmaps-api/commit/0aded3f3892c7b6b4fd4aac73405fdc5292119ac))
+
 ## [0.2.0](https://github.com/KeidsID/nest-gmaps-api/compare/v0.1.0...v0.2.0) (2025-02-07)
 
 
